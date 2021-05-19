@@ -44,58 +44,74 @@ public class BuscarArticulos extends HttpServlet {
         }
     }
 
-
-     @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String tipo=request.getParameter("tipo");
-        String fabricante=request.getParameter("fabricante");
-        String precio=request.getParameter("precio");
-        String codArt=request.getParameter("codArt");
-        String nomArt=request.getParameter("nomArt");
-        
-        if(cadVacia(nomArt)&& cadVacia(codArt)&&cadVacia(tipo)&& cadVacia(fabricante) && cadVacia(precio) ){
-            RequestDispatcher rd = request.getRequestDispatcher("/catalogo.jsp");
-            rd.forward(request, response);
-            return ;
-        }
-       
-        CriteriosArticulo criterios= new CriteriosArticulo();
-        if(!cadVacia(fabricante))criterios.setFabricante(fabricante);
-        if(!cadVacia(precio))criterios.setPrecio(precio);
-        if(!cadVacia(tipo)) criterios.setTipo(tipo);
-        if(!cadVacia(nomArt)) criterios.setNombre(nomArt);
-        if(!cadVacia(codArt)) criterios.setCodigo(codArt);
-        
         try {
-            Paginador p=gbd.getPaginadorArticulos(criterios, tamanioPagina);
-            int Pagina = paginaValida(request.getParameter("Pagina"),p.getNumPaginas());
+            String tipo = request.getParameter("tipo");
+            String fabricante = request.getParameter("fabricante");
+            String precio = request.getParameter("precio");
+            String codArt = request.getParameter("codArt");
+            String nomArt = request.getParameter("nomArt");
+            CriteriosArticulo criterios = new CriteriosArticulo();
+            Paginador p = gbd.getPaginadorArticulos(criterios, tamanioPagina);
 
-           
-            List<Articulo> listado=gbd.getArticulos(criterios,Pagina,tamanioPagina);
-            request.setAttribute("codArt",codArt);
-            request.setAttribute("nomArt",nomArt);
-            
-            request.setAttribute("tipo",tipo);
-            request.setAttribute("fabricante",fabricante);
-            request.setAttribute("precio",precio);            
-           
-            request.setAttribute("Adyacentes",p.adyacentes(Pagina));
-            request.setAttribute("Siguiente",p.siguiente(Pagina));
-            request.setAttribute("Anterior",p.anterior(Pagina));
-            
+            int Pagina = paginaValida(request.getParameter("Pagina"), p.getNumPaginas());
+            if (cadVacia(nomArt) && cadVacia(codArt) && cadVacia(tipo) && cadVacia(fabricante) && cadVacia(precio)) {
+                criterios.setPrecio(null);
+                criterios.setFabricante(null);
+                criterios.setTipo(null);
+                criterios.setNombre(null);
+                criterios.setCodigo(null);
+                
+                request.setAttribute("articulos", gbd.getArticulos(criterios, Pagina, tamanioPagina));
+                RequestDispatcher rd = request.getRequestDispatcher("/catalogo.jsp");
+                rd.forward(request, response);
+                return;
+            }
+
+            if (!cadVacia(fabricante)) {
+                criterios.setFabricante(fabricante);
+            }
+            if (!cadVacia(precio)) {
+                criterios.setPrecio(precio);
+            }
+            if (!cadVacia(tipo)) {
+                criterios.setTipo(tipo);
+            }
+            if (!cadVacia(nomArt)) {
+                criterios.setNombre(nomArt);
+            }
+            if (!cadVacia(codArt)) {
+                criterios.setCodigo(codArt);
+            }
+
+            List<Articulo> listado = gbd.getArticulos(criterios, Pagina, tamanioPagina);
+            request.setAttribute("codArt", codArt);
+            request.setAttribute("nomArt", nomArt);
+
+            request.setAttribute("tipo", tipo);
+            request.setAttribute("fabricante", fabricante);
+            request.setAttribute("precio", precio);
+
+            request.setAttribute("Adyacentes", p.adyacentes(Pagina));
+            request.setAttribute("Siguiente", p.siguiente(Pagina));
+            request.setAttribute("Anterior", p.anterior(Pagina));
+
             request.setAttribute("articulos", listado);
-            request.setAttribute("Pagina",Pagina);
-            request.setAttribute("numPags",p.getNumPaginas());
-            request.setAttribute("numRegs",listado.size()+"");
-            
-            request.setAttribute("GestorBD",gbd);
+            request.setAttribute("Pagina", Pagina);
+            request.setAttribute("numPags", p.getNumPaginas());
+            request.setAttribute("numRegs", listado.size() + "");
+
+            request.setAttribute("GestorBD", gbd);
+            request.setAttribute("tipos", gbd.getTiposArticulos());
+
             gbd.getTiposArticulos();
-            if(listado.size()==1){
+            if (listado.size() == 1) {
                 RequestDispatcher rd = request.getRequestDispatcher("/FichaArticulo");
                 rd.forward(request, response);
             }
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("/catalogo.jsp");
             rd.forward(request, response);
 
@@ -103,22 +119,26 @@ public class BuscarArticulos extends HttpServlet {
             Logger.getLogger(BuscarArticulos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public int paginaValida(String s,int NumPags){
-       try {
-            
-            int pag=Integer.parseInt(s);        
-            if(pag<0) return 1;
-            if(pag>=NumPags-1) return NumPags-1;
+
+    public int paginaValida(String s, int NumPags) {
+        try {
+
+            int pag = Integer.parseInt(s);
+            if (pag < 0) {
+                return 1;
+            }
+            if (pag >= NumPags - 1) {
+                return NumPags - 1;
+            }
             return pag;
-           
-        }catch (NumberFormatException exception) {
-             return 1;
-        }    
-       
+
+        } catch (NumberFormatException exception) {
+            return 1;
+        }
+
     }
-    
-    public boolean cadVacia(String s){
-        return ( s==null || s=="");
+
+    public boolean cadVacia(String s) {
+        return (s == null || s == "");
     }
 }

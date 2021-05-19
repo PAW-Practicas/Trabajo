@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import paw.bd.GestorBD;
 import paw.model.*;
+import paw.util.UtilesString;
 
 public class FichaArticulo extends HttpServlet {
 
@@ -23,7 +24,7 @@ public class FichaArticulo extends HttpServlet {
     
     try {
         Articulo articulo=null;
-        if(!codArt.equals("")){
+        if(!UtilesString.isVacia(codArt)){
         articulo = new GestorBD().getArticulo(codArt);
         }
         else{
@@ -38,8 +39,6 @@ public class FichaArticulo extends HttpServlet {
         
         if (articulo == null) 
         {
-         
-            
           request.setAttribute("enlaceSalir", "BuscarArtículos");
           response.sendError(404,"El artículo "+ codArt+" no existe");
           

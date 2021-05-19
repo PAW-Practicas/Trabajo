@@ -1,4 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link href="fontawesome/css/all.min.css" rel="stylesheet">
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,11 +14,12 @@
 
     <link href="css/electrosa.css" rel="stylesheet" media="all" type="text/css">
     <link href="css/formulario.css" rel="stylesheet" media="all" type="text/css">
+    <script src="js/Ejercicio3.js" type="text/javascript" defer></script>    
   </head>
 
   <body >
        <%@include file="cabecera.html" %>  
-
+       <script src="js/ej3.js" type="text/javascript"></script>
 
     <div class="sombra">
       <div class="nucleo">
@@ -208,6 +211,7 @@ A Coruña,Álava,Albacete,Alicante,Almería,Araba,Asturias,Ávila,Badajoz,Balear
                             </c:if>
                         </label>
                     <input class="text" type="password" name="pwd" id="pwd" size="10" value="${pwd}" />
+                      <a href="#" class="verContr"><span class="fas fa-eye"></span></a>
                   </div>
                 </div>					
 
@@ -218,6 +222,7 @@ A Coruña,Álava,Albacete,Alicante,Almería,Araba,Asturias,Ávila,Badajoz,Balear
                         <span class="Requerido">Requerido</span></label>
                         </c:if>
                     <input class="text" type="password" name="rpwd" id="rpwd" size="10" value="${rpwd}" />
+                    <a href="#" class="verContr"><span class="fas fa-eye"></span></a>
                   </div>
                 </div>		
               </div>
