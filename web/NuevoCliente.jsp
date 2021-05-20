@@ -61,7 +61,7 @@
                     <span class="Requerido">Requerido</span>
                     </c:if>    
                         </label>
-                <input type="text" name="cif" id="cif" size="15" value="${CIF}" />
+                <input type="text" name="cif" id="cif" maxlength="12" size="15" value="${CIF}" />
               </div>
               <div class="field">
                 <label for="calle">Dirección:
@@ -90,7 +90,7 @@
                             <span class="Requerido">Requerido</span>
                         </c:if>
                         </label>
-                    <input class="text" type="text" name="cp" id="cp" size="10" value="${CP}" />
+                    <input class="text" type="text" name="cp" id="cp" size="10" value="${CP}" maxlength="5" />
                   </div>
                 </div>					
 <!--
@@ -186,7 +186,7 @@ A Coruña,Álava,Albacete,Alicante,Almería,Araba,Asturias,Ávila,Badajoz,Balear
                     <span class="Requerido"> Requerido</span>
                     </c:if>   
                        </label>
-                <input class="text" type="text" name="email" id="email" size="40" value="${Email}" />
+                <input class="text" type="email" name="email" id="email" size="40" value="${Email}" />
               </div>
             </fieldset>
 

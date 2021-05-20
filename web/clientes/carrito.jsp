@@ -91,7 +91,9 @@
                   <td width="58%"><span class="codigo">${linea.getArticulo().getCodigo()}</span> - <br/><span class="descr">${linea.getArticulo().getNombre()}</span></td>
                   <td>${linea.getArticulo().getPvp()}</td>
                   <td>
-                    <input class="cantidad" type="text" name="C_${linea.getCodigo()}" size="3" value="3">
+                    <input class="cantidad" value="3" type="number" name="C_${linea.getCodigo()}" size="3"  min="1" max="10">
+                                                <!---value="C_{linea.getCodigo()}"--->
+                                                                                                    
                   </td>
                   <td>
                       

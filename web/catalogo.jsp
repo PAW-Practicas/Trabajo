@@ -74,7 +74,7 @@
     <script src="js/ej4.js" type="text/javascript"></script>
     <script src="js/ej5.js" type="text/javascript"></script>
     <script src="js/ej6.js" type="text/javascript"></script>
-    
+    <script src="js/ej8.js" type="text/javascript"></script>
     
     </head>
 
@@ -91,6 +91,17 @@
                     <a href="generica.html" title="Hojear catalogo">Hojear catalogo</a>	<!-- &nbsp; | &nbsp; 
                     <a href="..." title="Otra cosa">Otra cosa</a>   -->	
                 </div>
+                
+                <div class="dcha" style="width:75px" id="carroDrop">
+                <div style="position: absolute">
+                  <a href="clientes/Carrito">
+                    <img style="z-index: 0; position: absolute" src="img/AddCart2-50.png">
+                  </a>
+                  <div style="z-index: 10; position: absolute; top: 10px; left:8px; font-weight: bold; font-size: 15px"> ${carrito.getLineas().size()} </div> <!-- Cambiarás un cosa aquí -->
+                </div>
+              </div>
+
+                
                 <div class="contenido">
                     <h1>Nuestros productos</h1>
                     <p>Puede buscar los productos que necesite en nuestro cat&aacute;logo. Lo hemos organizado por marcas, tipo de electrodom&eacute;stico y rango de precios. Lo precios indicados en rojo corresponden a ofertas. </p>
@@ -204,12 +215,9 @@
 
                     <ul>
                         <c:forEach var="art" items="${articulos}">                
-                            <li class="item redondeo">
+                            <li class="item redondeo" draggable="true">
                                 <div class="foto">
                                     <a href="FichaArticulo?codArt=${art.codigo}"><img src="img/fotosElectr/${art.foto}" alt="${art.nombre}" longdesc="${art.descripcion}" width="80"></a>
-
-
-
                                 </div>
                                 <div class="datos">
                                     <a href="FichaArticulo?codArt=${art.codigo}"><span>${art.nombre}</span></a>
