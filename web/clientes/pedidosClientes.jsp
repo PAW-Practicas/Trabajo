@@ -116,7 +116,7 @@
                       
                       <td style="text-align: center"><a href="AnularPedido?codPedido=${pendiente.getCodigo()}"><img src="../img/cancel.png" title="Cancelar el pedido"/></td>
                       <td><a href="VerPedido?cp=${pendiente.getCodigo()}">${pendiente.getCodigo()} </td>
-                      <td> Fecha: <fmt:formatDate value="${pendiente.getFechaCierre().time}"/> </td>
+                      <td> Fecha: <fmt:formatDate pattern="dd/MM/yy" value="${pendiente.getFechaCierre().time}"/> </td>
                       <td>${pendiente.getDirEntrega()}</td>
                       <td style="text-align: right"><fmt:formatNumber value="${pendiente.getImporte()}"  />€</td>
                     </tr>
@@ -164,7 +164,7 @@
             
                     
                     <td><a href="VerPedido?cp=${completado.getCodigo()}">${completado.getCodigo()} </td>
-                    <td><fmt:formatDate value="${completado.getFechaCierre().time}"/></td>
+                    <td><fmt:formatDate pattern="dd/MM/yy" value="${completado.getFechaCierre().time}"/></td>
                     <td>${completado.getDirEntrega()}</td>
                     <td style="text-align: right"><fmt:formatNumber value="${completado.getImporte()}"  />€</td>
                 </tr>

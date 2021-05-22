@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import paw.bd.GestorBDPedidos;
+import paw.model.Almacen;
 import paw.model.ExcepcionDeAplicacion;
 import paw.model.PedidoEnRealizacion;
 
@@ -29,6 +30,9 @@ public class AnulaCarrito extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            Almacen a;
+            
+            
             PedidoEnRealizacion carrito = (PedidoEnRealizacion) request.getSession().getAttribute("carrito");
             if (carrito == null) {
                 response.sendError(400, "Bad Request");

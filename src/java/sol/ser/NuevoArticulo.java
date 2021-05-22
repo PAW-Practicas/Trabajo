@@ -41,7 +41,7 @@ public class NuevoArticulo extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            request.setAttribute("tipos", gbd.getTiposArticulos());
+            request.setAttribute("tipos", gbd.getTiposArticulos()); 
             request.setAttribute("fabricantes", gbd.getFabricantes());
             RequestDispatcher rd = request.getRequestDispatcher("nuevoArticulo.jsp");
             rd.forward(request, response);

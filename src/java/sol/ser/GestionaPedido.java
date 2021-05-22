@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import paw.bd.GestorBD;
 import paw.bd.GestorBDPedidos;
+import paw.model.Almacen;
 import paw.model.Cliente;
 import paw.model.ExcepcionDeAplicacion;
 import paw.model.LineaEnRealizacion;
@@ -28,6 +29,12 @@ public class GestionaPedido extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            
+//           for (Almacen a : gbd.getAlmacenes()){
+//               a.getCoordX()
+//           }
+            
+            
             String accion = request.getParameter("accion");
             String codArt = request.getParameter("codArt");
             PedidoEnRealizacion carrito = (PedidoEnRealizacion) request.getSession().getAttribute("carrito");
