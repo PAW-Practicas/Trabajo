@@ -20,14 +20,14 @@
              <%@include file="clientes/cabeceraCliente.html" %>    
     </c:if>
     <c:if test="${roladmin==true}">
-                 <%@include file="admin/cabeceraAdmin.html" %>     
+         <%@include file="admin/cabeceraAdmin.html" %>     
     </c:if>    
      
     <c:if test="${rolCliente==false}">
         <c:if test="${roladmin==false}">
             <%@include file="cabecera.html" %> 
-</c:if>
-</c:if>
+        </c:if>
+    </c:if>
     <div class="sombra">
       <div class="nucleo">
         <div id="migas">

@@ -24,66 +24,66 @@
         <link href="css/catalogoLista.css" rel="alternate stylesheet" media="all" type="text/css" title="lista">
 
         <script src="js/styleswitcherFGI.js" type="text/javascript"></script>
-       
+
         <script>
-        window.addEventListener("load",init) ;
-           
-            
-        function init(){
-            var as = document.querySelector(".modovisual").getElementsByTagName("a");
-            as[0].addEventListener("click",function(evt){
-              cambiadorCss.setHojaCss("mosaico") ;
-              evt.preventDefault();
-            });
-            as[1].addEventListener("click",function(evt){
-              cambiadorCss.setHojaCss("lista") ;
-              evt.preventDefault();
-            });
-            
-            
-            
-            //ejercicio 2 
-            var x= document.getElementById("precio");
-         
-            var precio="${precio}";
-            var precios = ["- Cualquiera -","10-50","50-100", "100-200","200-500","500-1000","1000"];
-            
-            
-            var value =["-1","10-50","50-100","100-200","200-500","500-1000","1000"] ;
+            window.addEventListener("load", init);
 
-            for(i=0;i<precios.length;i++)
-            {
-                let option = document.createElement("option");
-                option.text=precios[i];
-                option.value=value[i];
-                x.add(option);
-            }
 
-            var pr ='${precio}';
-            if(pr!==-1){
-                x.value=pr;
+            function init() {
+                var as = document.querySelector(".modovisual").getElementsByTagName("a");
+                as[0].addEventListener("click", function (evt) {
+                    cambiadorCss.setHojaCss("mosaico");
+                    evt.preventDefault();
+                });
+                as[1].addEventListener("click", function (evt) {
+                    cambiadorCss.setHojaCss("lista");
+                    evt.preventDefault();
+                });
+
+
+
+                //ejercicio 2 
+                var x = document.getElementById("precio");
+
+                var precio = "${precio}";
+                var precios = ["- Cualquiera -", "10-50", "50-100", "100-200", "200-500", "500-1000", "1000"];
+
+
+                var value = ["-1", "10-50", "50-100", "100-200", "200-500", "500-1000", "1000"];
+
+                for (i = 0; i < precios.length; i++)
+                {
+                    let option = document.createElement("option");
+                    option.text = precios[i];
+                    option.value = value[i];
+                    x.add(option);
+                }
+
+                var pr = '${precio}';
+                if (pr !== -1) {
+                    x.value = pr;
+                }
+
+
+
+
+
             }
-            
-        
-   
-        
-    
-    }
-    </script>
-    
-    
-    <script src="js/ej4.js" type="text/javascript"></script>
-    <script src="js/ej5.js" type="text/javascript"></script>
-    <script src="js/ej6.js" type="text/javascript"></script>
-    <script src="js/ej8.js" type="text/javascript"></script>
-    
+        </script>
+
+
+        <script src="js/ej4.js" type="text/javascript"></script>
+        <script src="js/ej5.js" type="text/javascript"></script>
+        <script src="js/ej6.js" type="text/javascript"></script>
+        <script src="js/ej8.js" type="text/javascript"></script>
+        <script src="js/ej11.js" type="text/javascript"></script>
     </head>
 
     <body >
         <%@include file="cabecera.html" %> 
-    
-        
-        
+
+
+
         <div class="sombra">
             <div class="nucleo">
 
@@ -92,24 +92,24 @@
                     <a href="generica.html" title="Hojear catalogo">Hojear catalogo</a>	<!-- &nbsp; | &nbsp; 
                     <a href="..." title="Otra cosa">Otra cosa</a>   -->	
                 </div>
-                
-                <div class="dcha" style="width:75px" id="carroDrop">
-                <div style="position: absolute">
-                  <a href="clientes/Carrito">
-                    <img style="z-index: 0; position: absolute" src="img/AddCart2-50.png">
-                  </a>
-                  <div style="z-index: 10; position: absolute; top: 10px; left:8px; font-weight: bold; font-size: 15px"> ${carrito.getLineas().size()} </div> <!-- Cambiarás un cosa aquí -->
-                </div>
-              </div>
 
-                
+                <div class="dcha" style="width:75px" id="carroDrop">
+                    <div style="position: absolute">
+                        <a href="clientes/Carrito">
+                            <img style="z-index: 0; position: absolute" src="img/AddCart2-50.png">
+                        </a>
+                        <div style="z-index: 10; position: absolute; top: 10px; left:8px; font-weight: bold; font-size: 15px"> ${carrito.getLineas().size()} </div> <!-- Cambiarás un cosa aquí -->
+                    </div>
+                </div>
+
+
                 <div class="contenido">
                     <h1>Nuestros productos</h1>
                     <p>Puede buscar los productos que necesite en nuestro cat&aacute;logo. Lo hemos organizado por marcas, tipo de electrodom&eacute;stico y rango de precios. Lo precios indicados en rojo corresponden a ofertas. </p>
                     <div class="filtroCatalogo">
                         <form name="filtroCatalogo" id="filtroCatalogo" action="BuscarArticulos">
                             <script>
-                            
+
                             </script>
                             <label for="tipo">Tipo: </label>
                             <select name="tipo" id="tipo">
@@ -136,26 +136,26 @@
                             <label for="precio">Precio: </label>
                             <select name="precio" id="precio"></select>
 
-                           <!--- <p>
-                                <label for="nomArt">Búsqueda por nombre </label>
-                                <textarea id="w3review" name="nomArt" rows="1" cols="50"></textarea>
-                            </p>
-                            <br>
-                            <label for="codArt">Búsqueda por código </label>
-                            <textarea id="w3review" name="codArt" rows="1" cols="50"></textarea>
-                            --->
-                            
-                                <input name="buscar" id="buscar" type="image" title="Buscar" src="img/search25.png" alt="Buscar">
-                            
-                            
+                            <!--- <p>
+                                 <label for="nomArt">Búsqueda por nombre </label>
+                                 <textarea id="w3review" name="nomArt" rows="1" cols="50"></textarea>
+                             </p>
+                             <br>
+                             <label for="codArt">Búsqueda por código </label>
+                             <textarea id="w3review" name="codArt" rows="1" cols="50"></textarea>
+                             --->
+
+                            <input name="buscar" id="buscar" type="image" title="Buscar" src="img/search25.png" alt="Buscar">
+
+
                             <br>
                             <input type="text" name="nomArt" id="nombre" value="" placeHolder="Nombre" style="margin-left:
-                            10px"/>
+                                   10px"/>
                             <input type="text" name="codArt" id="codigo" value="" placeholder="Código" />
 
 
-                            
-                            
+
+
                         </form>
 
                         <div class="modovisual">
@@ -196,24 +196,6 @@
 
                         </c:if>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <ul>
                         <c:forEach var="art" items="${articulos}">                
                             <li class="item redondeo" draggable="true">
@@ -222,33 +204,21 @@
                                 </div>
                                 <div class="datos">
                                     <a href="FichaArticulo?codArt=${art.codigo}"><span>${art.nombre}</span></a>
-                                        <div class="precio">
-                                            <span class="oferta">${art.pvp} &euro;</span>
-                                        </div>
-                                        <div class="carro">
-                                            <a href="clientes/GestionaPedido?codArt=${art.codigo}&accion=comprar"><img src="img/shopcartadd_16x16.png" title="Añadir a mi carro de la compra"></a>
-                                        </div>
+                                    <div class="precio">
+                                        <span class="oferta">${art.pvp} &euro;</span>
+                                    </div>
+                                    <div class="carro">
+                                        <a href="clientes/GestionaPedido?codArt=${art.codigo}&accion=comprar"><img src="img/shopcartadd_16x16.png" title="Añadir a mi carro de la compra"></a>
+                                    </div>
                                 </div>			  
                                 <div class="codigo"><a href="FichaArticulo?codArt=${art.codigo}">${art.codigo}</a></div>
-                                                </li>    
+                            </li>    
                         </c:forEach>        
                     </ul>			
-                                            <div class="clear"></div>
-
-                                    </div>
-
-
-
-
-
-
-
-                            </div>
-
-
-                            <%@include file="pie.html" %>
-
-
-                            </div>
-                            </body>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <%@include file="pie.html" %>
+        </div>
+    </body>
 </html>

@@ -56,7 +56,7 @@
 
         </script>
 
-        <%@include file="cabecera.html" %> 
+        <%@include file="cabeceraCliente.html" %> 
 
         <div class="sombra">
             <div class="nucleo">
