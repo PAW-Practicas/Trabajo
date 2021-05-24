@@ -22,6 +22,7 @@
   </head>
 
   <body >
+    <script src="../js/ej12doce.js" type="text/javascript"></script>
     <div class="logo"><a href="../index.html"><img src="../img/LogoElectrosa200.png" border="0"></a></div>
 
 
@@ -129,9 +130,9 @@
                             <option value="${tipo}">${tipo}</option>      
                        </c:forEach>
                     </select>       
-                    <input id="otroTip" type="checkbox" name="" value="" title="Introduce otro tipo" disabled/>               
+                    <input id="otroTip" type="checkbox" name="" value="" title="Introduce otro tipo" />               
                     Otro 
-                    <div id="otrotipoCont"><!--<label>&nbsp;</label><input class="text" type="text" name="tipo" id="tipo" value="" >--></div>
+                    <div id="otrotipoCont" style="clear:both".><label>&nbsp;</label><input class="text" type="text" name="tipo" id="tipo" value="" ></div>
                   </div>
                 </div>
                 <div class="right">
@@ -158,9 +159,9 @@
                             <option value="${f}">${f}</option>      
                        </c:forEach>                     
                     </select>
-                    <input id="otroFab" type="checkbox" name="" value=""  title="Introduce otro fabricante" disabled/>
+                    <input id="otroFab" type="checkbox" name="" value=""  title="Introduce otro fabricante"/>
                     Otro 
-                    <div id="otrofabricanteCont"><!--<label>&nbsp;</label><input class="text" type="text" name="fabricante" id="fabricante" value="" >--></div>
+                    <div id="otrofabricanteCont" style="clear:both"><label>&nbsp;</label><input class="text" type="text" name="fabricante" id="fabricante" value="" ></div>
                   </div>
                 </div>		
               </div>
