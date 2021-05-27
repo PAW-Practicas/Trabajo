@@ -14,8 +14,45 @@
     <link href="css/fichaProducto.css" rel="stylesheet" media="all" type="text/css">
   </head>
 
-  <body> 
-     
+  <body>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script>
+          window.addEventListener("load",p9_ej1);
+
+
+
+        function p9_ej1(){
+            var stock=document.getElementsByClassName("stockArt");
+            stock[0].addEventListener("click",function () {     // Al seleccionar una fecha...
+                      pideStock()
+                      
+                      actualizaStock()
+        });
+            
+            }
+            function pideStock() {
+                axios('api/GetStockArticulo', {
+                params : {codArt:'${art.codigo}'}, 
+                responseType: 'text'
+                })
+            .then(response => {
+            actualizaStock(response.data)
+            })
+            .catch( err => { alert('Error [' + err + ']') })
+           }
+           
+           function actualizaStock(elStock) {
+            let dest = document.getElementById('stock')
+            dest.innerHTML = elStock + ' unidades';
+           }
+
+
+          </script>
+      
+      
+      
+      
+      
     <c:if test="${rolCliente==true}">
              <%@include file="clientes/cabeceraCliente.html" %>    
     </c:if>
@@ -48,6 +85,12 @@
             <div class="precio">
               <span>Precio: ${art.pvp} &euro;</span>	
             </div>
+            <div class="stockArt">
+            <img src="img/Almacen30x30.png" title="Ver stock disponible">&nbsp;
+            <span id="stock"><!-- x unidades --></span><br/>
+           </div>
+
+            
             <div class="carroDetalle" >
               <a href="clientes/GestionaPedido?codArt=${art.codigo}&accion=comprar"><img src="img/AddCart2-50.png" title="Añadir a mi pedido en realización">
             </div>
