@@ -5,6 +5,7 @@
  */
 package sol.ser;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,6 +57,15 @@ public class VerPedido extends HttpServlet {
             p.getLineas();
 
             
+            if(request.getHeader("X-Requested-With")!=null){
+                response.setContentType("application/json; charset=UTF-8");
+                Gson gson = new Gson();
+                String json = gson.toJson(p);
+                response.getWriter().print(json);
+                return;
+            }
+            
+            
             
             if(pedPendientes.contains(p)||pedCompletados.contains(p)){
                  double PrecioPedido=0;
@@ -77,6 +87,8 @@ public class VerPedido extends HttpServlet {
             }
             
             else{
+                
+                
             request.setAttribute("link", "../Salir");
             response.sendError(403,"Usted no está autorizado para consultar esta información");
             
