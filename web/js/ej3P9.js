@@ -1,27 +1,34 @@
-window.addEventListener("load", ej3);
-function ej3(e) {
+window.addEventListener("load", ej4_9);
+function ej4_9(e) {
 
-    //parte izq
-    var cantidad = document.getElementsByClassName("cantidad");
-    for (let e of cantidad) {
-        e.addEventListener("change", function (e) {
-            var valor = this.value
-            var cod = e.name.split("_")[1];
-        
-        
-        
-             axios('api/GetStockArticulo', {
-            params : {cart:'${art.codigo}'}, // o {cart:'<%= art.getCodigo()%>'}
-            responseType: 'text'
-            })
-            .then(response => {
-            actualizaStock(response.data)
-            })
-            .catch( err => { alert('Error [' + err + ']') })
+//parte izq
+var cp = document.getElementsById("cp");
+        var chisme = e.currentTarget
 
-        
-        
-        })
-        
+
+        cp.addEventListener("change", f(e));
+       
     }
-}
+    
+    function f(e){
+        
+        var cp=e.currentTarget
+        var provincia =cp.value
+         axios('api/GetProvincia', {
+        params: {CP: provincia},
+                responseType: 'text'
+        })
+                .then(response => {
+                var respuesta = response.data
+                
+            var provincia = document.getElementsById("provincia");
+                        provincia.selected = "respuesta"
+
+                }).catch(err => {
+        alert('Error [' + err + ']')
+        })
+
+
+
+        }
+    

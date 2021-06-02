@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="fontawesome/css/all.min.css" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +19,40 @@
   </head>
 
   <body >
+      <script>
+           window.addEventListener("load", ej4_9);
+function ej4_9(e) {
+
+//parte izq
+var cp = document.getElementById("cp");
+        cp.addEventListener("change", f);
+       
+    }
+    
+    function f(e){
+        
+        var cp=e.currentTarget
+        var provincia =cp.value
+         
+         axios('api/GetProvincia', {
+         params: {cp: provincia},
+         responseType: 'text'
+        }).then(response => {
+         var respuesta = response.data
+         var provincia = document.getElementById("provincia");
+         if(respuesta!==null) provincia.value=respuesta
+
+                }).catch(err => {
+        alert('Error [' + err + ']')
+        })
+
+
+
+        }
+    
+       
+      </script>
+      
        <%@include file="cabecera.html" %>  
        <script src="js/ej3.js" type="text/javascript"></script>
 
