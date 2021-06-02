@@ -21,7 +21,7 @@ function ej4(){
     span.innerHTML = "&nbsp;";
     
     var tresPuntos = document.createElement("button");//2
-    tresPuntos.style.backgroundColor="white";
+    tresPuntos.style.backGroundColor="white";
     tresPuntos.style.border="none";
     
     var f3=document.createElement("span");//3

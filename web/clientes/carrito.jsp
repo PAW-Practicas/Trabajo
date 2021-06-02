@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
 <html>
@@ -23,34 +24,75 @@
 
     <body >
 
+        <script>
+           window.addEventListener("load", ej3);
+function ej3(e) {
+
+    //parte izq
+    var cantidad = document.getElementsByClassName("cantidad");
+    for (let e of cantidad) {
+        e.addEventListener("change", function (e) {
+            var valor = this.value
+            
+            var cod=document.getElementsByClassName("codigo").item(0);
+            var cod=cod.innerHTML;
+
+            var chisme= e.currentTarget
+        
+        
+        
+             axios('../api/GetStockArticulo', {
+            params : {codArt:cod}, 
+            responseType: 'text'
+            })
+            .then(response => {
+            var respuesta=response.data
+//              var canDrive = age > 16 ? 'yes' : 'no';
+
+              chisme.style.backgroundColor=respuesta>valor?"#5CBC67":"#C02C11";
+//              if(valor>v)
+//              chisme.style.backgroundColor = "#C02C11";
+//              chisme.style.backgroundColor = "#5CBC67";
+            })
+            .catch( err => { alert('Error [' + err + ']') })
+
+        
+        
+        })
+        
+    }
+}
+                        
+        </script>
+
 
         <script>
-            window.addEventListener("load", ej9);
-            function ej9() {
-                var selector = document.querySelectorAll(".fecha");
-                for(let e of selector){
+                    window.addEventListener("load", ej9);
+                    function ej9() {
+                    var selector = document.querySelectorAll(".fecha");
+                    for (let e of selector) {
                     setCalendar(e);
-                }
-            }
-            function setCalendar(campo) {
-                // Configuración del calendario
-                let calCnf = {
+                    }
+                    }
+                    function setCalendar(campo) {
+                    // Configuración del calendario
+                    let calCnf = {
                     dateFormat: "%d/%m/%Y",
-                    css: "dhx_widget--bordered",
-                    value: campo.value,
-                    disabledDates: date => date < new Date()
-                };
-                let calendar = new dhx.Calendar(null, calCnf); // Creación del calendario
-                let popup = new dhx.Popup();                   // Pop-up ...
-                popup.attach(calendar);                        // ... asociado al calendario ...
-                campo.addEventListener("click", function () {
-                    popup.show(campo);                           // ...que se muestra al hacer clic en el campo
-                });
-                calendar.events.on("change", function () {     // Al seleccionar una fecha...
-                    campo.value = calendar.getValue();           // ... se cambia el valor del campo y ...
-                    popup.hide();                                // ... se oculta el pop-up/calendario
-                });
-            }
+                            css: "dhx_widget--bordered",
+                            value: campo.value,
+                            disabledDates: date => date < new Date()
+                    };
+                    let calendar = new dhx.Calendar(null, calCnf); // Creación del calendario
+                    let popup = new dhx.Popup(); // Pop-up ...
+                    popup.attach(calendar); // ... asociado al calendario ...
+                    campo.addEventListener("click", function () {
+                    popup.show(campo); // ...que se muestra al hacer clic en el campo
+                    });
+                    calendar.events.on("change", function () {     // Al seleccionar una fecha...
+                    campo.value = calendar.getValue(); // ... se cambia el valor del campo y ...
+                    popup.hide(); // ... se oculta el pop-up/calendario
+                    });
+                    }
 
 
 
