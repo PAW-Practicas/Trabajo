@@ -14,7 +14,61 @@
     <link href="css/electrosa.css" rel="stylesheet" media="all" type="text/css">
   </head>
   <body >
-     <%@include file="cabecera.html" %>  
+      
+      <!--locale-->
+       <c:if test="${not empty lang}" >
+        <fmt:setLocale value="${lang}" scope="session"/>
+       </c:if>
+      
+       <fmt:setBundle basename="electrosaMsg_en.properties"/> 
+        <fmt:message key="pest.usr"/>
+        
+        
+<!--        
+        en_US
+        es_ES
+      
+        bundle-->
+        
+        
+        
+        
+            <div class="logo"><a href="index.html"><img src="img/LogoElectrosa200.png" border="0"></a></div>
+
+        <div class="sombra">
+            <div class="nucleo">
+                <div id="lang">
+                    <a href="index.jsp?lang=es">Español</a> &nbsp; | &nbsp; <a href="index.jsp?lang=en">English</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="barra_menus">	
+            <div class="pestanias">
+                <div class="grupoPestanias">
+                    <div class="pestaniaSel">Para usuarios</div>
+                    <div class="pestaniaNoSel"><a href="admin/index.html">Intranet</a></div>
+                </div>
+            </div>
+
+            <div id="menu" >
+                <ul>
+                    <li>
+                        <a href="index.html">Sobre electrosa<br/><img src="img/Home4.png"/></a>
+                    </li>
+                    <li>
+                        <a href="donde.jsp">Dónde estamos<br/><img src="img/map.png"/></a>
+                    </li>
+                    <li>
+                        <a href="catalogo.jsp">Hojear catálogo<br/><img src="img/catalog.png"/></a>
+                    </li>
+                    <li>
+                        <a href="clientes/AreaCliente">Usuario registrado<br/><img src="img/registrado.png"/></a>
+                    </li>
+                </ul>
+                <div style="clear: left;"></div>
+            </div>
+        </div>  
 
      <c:if test="${not empty param.lang}" >
         <fmt:setLocale value="${param.lang}" scope="session"/>
