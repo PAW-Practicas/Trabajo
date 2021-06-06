@@ -17,7 +17,43 @@
    
       
     <c:if test="${rolCliente==true}">
-             <%@include file="clientes/cabeceraCliente.html" %>    
+             <div class="logo"><a href="../index.html"><img src="../img/LogoElectrosa200.png" border="0"></a></div>
+
+
+    <div class="sombra">
+      <div class="nucleo">
+        <div id="lang">
+          <a href="index.html">Español</a> &nbsp; | &nbsp; <a href="index.html">English</a>
+        </div>
+      </div>
+    </div>  
+
+    <div class="barra_menus">
+      <div class="pestanias">
+        <div class="grupoPestanias">
+          <div class="pestaniaSel">Para usuarios</div>
+          <div class="pestaniaNoSel">Intranet</div>
+        </div>
+      </div>
+
+      <div id="menu">
+        <ul>
+          <li>
+            <a href="BuscarArticulos">Comprar </a>
+          </li>
+          <li>
+            <a href="PedidosCliente">Mis pedidos </a>
+          </li>
+          <li>
+            <a href="EditaCliente">Cambiar datos personales </a>	
+          </li>
+          <li>
+            <a href="clientes/Salir">Cerrar sesión </a>	
+          </li>
+        </ul>
+        <div style="clear: left;"></div>
+      </div>
+    </div>   
     </c:if>
     
     <c:if test="${rolCliente!=true}">
@@ -28,7 +64,7 @@
     <div class="sombra">
       <div class="nucleo">
         <div id="migas">
-          <a href="index.html" title="Inicio" >Inicio</a><!-- &nbsp; | &nbsp; 
+          <a href="index.jsp" title="Inicio" >Inicio</a><!-- &nbsp; | &nbsp; 
           <a href="..." title="Otra cosa">Otra cosa</a>   -->	
         </div>
 
