@@ -38,16 +38,16 @@
       <div id="menu" >
         <ul>
           <li>
-            <a href="index.html">Sobre electrosa<br/><img src="${pageContext.request.contextPath}/img/Home4.png"/></a>
+            <a href="index.jsp">Sobre electrosa<br/><img src="${pageContext.request.contextPath}/img/Home4.png"/></a>
           </li>
           <li>
-            <a href="index.html">Dónde estamos<br/><img src="${pageContext.request.contextPath}/img/map.png"/></a>
+            <a href="index.jsp">Dónde estamos<br/><img src="${pageContext.request.contextPath}/img/map.png"/></a>
           </li>
           <li>
-            <a href="../BuscarArticulos">Hojear catálogo<br/><img src="${pageContext.request.contextPath}/img/catalog.png"/></a>
+            <a href="BuscarArticulos">Hojear catálogo<br/><img src="${pageContext.request.contextPath}/img/catalog.png"/></a>
           </li>
           <li>
-            <a href="AreaCliente">Usuario registrado<br/><img src="${pageContext.request.contextPath}/img/registrado.png"/></a>
+            <a href="clientes/AreaCliente">Usuario registrado<br/><img src="${pageContext.request.contextPath}/img/registrado.png"/></a>
           </li>
         </ul>
         <div style="clear: left;"></div>
@@ -73,7 +73,7 @@
             <a href="PedidosCliente">Mis pedidos </a>
           </li>
           <li>
-            <a href="clientes/EditaCliente">Cambiar datos personales </a>	
+            <a href="'EditaCliente">Cambiar datos personales </a>	
           </li>
           <li>
             <a href="../Salir">Cerrar sesión </a>	
@@ -115,8 +115,8 @@
                         <c:out default="Error de aplicación" value="${requestScope['javax.servlet.error.message']}"/>
                     </div>
                     
-                        <c:if test="${empty link}"> <div class="errorb"><a href="${pageContext.request.contextPath}/index.html"}>Salir de aqui</a></div></c:if>
-                        <c:if test="${!empty link}"> <div class="errorb"><a href="${link}"}>Salir de aqui</a></div></c:if>
+                        <c:if test="${empty link}"> <div class="errorb"><a href="${pageContext.request.contextPath}/index.jsp">Salir de aqui</a></div></c:if>
+                        <c:if test="${!empty link}"> <div class="errorb"><a href="${link}">Salir de aqui</a></div></c:if>
 		  </div>
 		  <div class="clear"></div>
           

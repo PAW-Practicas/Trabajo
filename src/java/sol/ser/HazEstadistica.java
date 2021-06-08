@@ -43,6 +43,8 @@ public class HazEstadistica extends HttpServlet {
             try {
               String ventas=  gbp.getEstadisticaVentasJSON(year, tipo, number);
               request.setAttribute("ventas", ventas);
+              request.setAttribute("anio",anio);
+              request.setAttribute("tipo",tipo);
                 RequestDispatcher rd = request.getRequestDispatcher("estadistica.jsp");
                  rd.forward(request, response);
                 

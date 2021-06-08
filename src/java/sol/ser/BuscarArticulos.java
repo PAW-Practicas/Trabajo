@@ -63,8 +63,8 @@ public class BuscarArticulos extends HttpServlet {
                 criterios.setTipo(null);
                 criterios.setNombre(null);
                 criterios.setCodigo(null);
-                
-                request.setAttribute("articulos", gbd.getArticulos(criterios, Pagina, tamanioPagina));
+                List l = gbd.getArticulos(criterios, Pagina, tamanioPagina);
+                request.setAttribute("articulos", l);
                 RequestDispatcher rd = request.getRequestDispatcher("/catalogo.jsp");
                 rd.forward(request, response);
                 return;

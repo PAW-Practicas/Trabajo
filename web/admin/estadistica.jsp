@@ -132,7 +132,7 @@
                 }
               }
 			  
-			  pintaGrafico(${ventas}, 'Ventas de Frigorífico en 2013', 'chart_div')
+			  pintaGrafico(${ventas}, 'Ventas de ${tipo} en ${anio}', 'chart_div')
           </script>
 
           <div class="clear"></div>

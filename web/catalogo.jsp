@@ -6,13 +6,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="fontawesome/css/all.min.css" rel="stylesheet">
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
 <html>
     <head>
+         <c:if test="${not empty param.lang}" >
+        <fmt:setLocale value="${param.lang}" scope="session"/>
+     </c:if>   
+      <fmt:setBundle basename="electrosaMsg"/>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" lang="es-ES">
-        <title>Electrosa >> cat&aacute;logo</title>
+        <title><fmt:message key="catalogo.tit"/> </title>
         <meta name="description" content="Aplicación de prueba de Programación de aplicaciones Web; Grado en informática; Universidad de La Rioja." lang="es-ES">
         <meta name="keywords" content="electrodomesticos" lang="es-ES">
         <meta name="language" content="es-ES">
@@ -80,7 +86,9 @@
     </head>
 
     <body >
-        <%@include file="cabecera.html" %> 
+        
+        
+      <%@include file="cabecera3.html" %>
 
 
 
@@ -104,14 +112,14 @@
 
 
                 <div class="contenido">
-                    <h1>Nuestros productos</h1>
-                    <p>Puede buscar los productos que necesite en nuestro cat&aacute;logo. Lo hemos organizado por marcas, tipo de electrodom&eacute;stico y rango de precios. Lo precios indicados en rojo corresponden a ofertas. </p>
+                    <h1><fmt:message key="catalogo.head"/></h1>
+                    <p><fmt:message key="catalogo.txt"/> </p>
                     <div class="filtroCatalogo">
                         <form name="filtroCatalogo" id="filtroCatalogo" action="BuscarArticulos">
                             <script>
 
                             </script>
-                            <label for="tipo">Tipo: </label>
+                            <label for="tipo"><fmt:message key="catalogo.fltr.tipo"/> </label>
                             <select name="tipo" id="tipo">
                                 <option value="-1">- Cualquiera -</option>
                                 <option value="Aspirador">Aspiradores</option>
@@ -125,7 +133,7 @@
                                 <option value="Placa">Placas</option>
                             </select>
 
-                            <label for="fabricante">Fabricante: </label>
+                            <label for="fabricante"><fmt:message key="catalogo.fltr.fab"/> </label>
                             <select name="fabricante" id="fabricante">
                                 <option value="-1">- Cualquiera -</option>
                                 <option value="Edesa">Edesa</option>
@@ -133,7 +141,7 @@
                                 <option value="Miele">Miele</option>
                             </select>
 
-                            <label for="precio">Precio: </label>
+                            <label for="precio"><fmt:message key="catalogo.fltr.pvp"/></label>
                             <select name="precio" id="precio"></select>
 
                             <!--- <p>
@@ -159,7 +167,7 @@
                         </form>
 
                         <div class="modovisual">
-                            <a href="catalogo.html">Mosaico</a> &nbsp; | &nbsp; <a href="catalogo.html">Lista</a>
+                            <a href="catalogo.html"><fmt:message key="catalogo.fltr.mos"/></a> &nbsp; | &nbsp; <a href="catalogo.html"><fmt:message key="catalogo.fltr.lst"/></a>
                         </div>
                         <div class="clear"></div>
                     </div>

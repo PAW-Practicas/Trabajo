@@ -127,7 +127,7 @@ function ej3(e) {
 
                             <c:forEach var="linea" items="${carrito.getLineas()}">   
                                 <tr >
-                                    <td width="6%" style="text-align:center"><a href="GestionaPedido?accion=Quitar&cl=L-87601"><img src="../img/cancel.png" alt="Quitar del pedido" border="0" title="Quitar del pedido"></a></td>
+                                    <td width="6%" style="text-align:center"><a href="GestionaPedido?accion=quitar&codArt=${linea.codigo}"><img src="../img/cancel.png" alt="Quitar del pedido" border="0" title="Quitar del pedido"></a></td>
                                     <td width="58%"><span class="codigo">${linea.getArticulo().getCodigo()}</span> - <br/><span class="descr">${linea.getArticulo().getNombre()}</span></td>
                                     <td>${linea.getArticulo().getPvp()}</td>
                                     <td>

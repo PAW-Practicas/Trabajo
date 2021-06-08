@@ -19,6 +19,7 @@ import paw.bd.GestorBD;
 import paw.model.Cliente;
 import paw.model.Direccion;
 import paw.model.ExcepcionDeAplicacion;
+import paw.util.ReCaptchaException;
 import paw.util.UtilesString;
 import paw.util.Validacion;
 import paw.util.servlet.UtilesServlet;
@@ -30,7 +31,8 @@ import paw.util.servlet.UtilesServlet;
 public class Registro extends HttpServlet {
 
     private static GestorBD gbd = new GestorBD();
-
+//public static paw.util.ReCaptchaValidator valCaptcha = new paw.util.ReCaptchaValidator("6LevlBcbAAAAAOiERcYFRxMO-kwOFqY6lBC0sJi0","6LevlBcbAAAAAIdEn7AFRrXO70lgSnwnlPjgmIIU ");
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,6 +46,8 @@ public class Registro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        
+        
         try {
             paw.model.Cliente c = (paw.model.Cliente) UtilesServlet.populateBean("paw.model.Cliente", request);
             paw.model.Direccion d = (paw.model.Direccion) UtilesServlet.populateBean("paw.model.Direccion", request);
@@ -58,13 +62,19 @@ public class Registro extends HttpServlet {
             if(UtilesString.isVacia(privacidadOK)) privacidadOK="0";
             List<String> l=valida(c, usr, pwd, rpwd, Integer.parseInt(privacidadOK), gbd);
 
-            
+                      
+
 
             
+//            if(l.isEmpty()&& valCaptcha.verifyResponse(request)  ){
             if(l.isEmpty()){
                 Cliente c2=gbd.insertaCliente(c, pwd, rpwd);
                 request.getSession().setAttribute("cliente", c2);
-                response.sendRedirect("clientes/AreaCliente");
+                
+                String email= request.getParameter("email");
+                
+                request.setAttribute("email",email);
+                response.sendRedirect("Mail");
             }
             else{
                 
@@ -87,6 +97,8 @@ public class Registro extends HttpServlet {
                 request.setAttribute("pwd", pwd);
                  if(!l.contains("Las contraseñas son diferentes")) request.setAttribute("rpwd", rpwd);
                  
+                 
+                 
                  request.setAttribute("provincia",request.getParameter("provincia"));
                  
                
@@ -98,7 +110,14 @@ public class Registro extends HttpServlet {
 
         } catch (ExcepcionDeAplicacion ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
+//        catch (ReCaptchaException ex) {
+//            
+//             RequestDispatcher rd = request.getRequestDispatcher("NuevoCliente.jsp");
+//            rd.forward(request, response);
+//            
+//            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
     }
 

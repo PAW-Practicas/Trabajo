@@ -11,7 +11,7 @@ function ej11() {
         x.addEventListener("dblclick", function (e) {
            var hijos=x.getElementsByClassName("codigo").item(0);
               var enlace=hijos.innerText;
-          window.open("http://localhost:8080/PAW-pr8/FichaArticulo?codArt="+enlace,enlace,"width=800,height=500");
+          window.open("http://localhost:8080/PAW-pr9/FichaArticulo?codArt="+enlace,enlace,"width=800,height=500");
         });
            // 
 //            var enlace=e.currentTarget.querySelector('.carro a').href;

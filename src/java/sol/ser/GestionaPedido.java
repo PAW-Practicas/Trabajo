@@ -57,9 +57,12 @@ public class GestionaPedido extends HttpServlet {
                 }
                 
                 if (accion.equals("quitar")) {
-                    request.setAttribute("accion", "quitar");
-                    request.setAttribute("codArt", codArt);
-                    response.sendRedirect("Carrito");
+//                    request.setAttribute("accion", "quitar");
+//                    request.setAttribute("codArt", codArt);
+                    
+                   boolean b=carrito.removeLinea(codArt);
+                    request.getSession().setAttribute("carrito",carrito);
+                    response.sendRedirect("carrito.jsp");
                     return;
                 }
                 

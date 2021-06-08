@@ -26,7 +26,7 @@ public class Salir extends HttpServlet {
             throws ServletException, IOException {
         HttpSession s=request.getSession(false);
         if(s!=null)s.invalidate();
-        response.sendRedirect("index.html");
+        response.sendRedirect("index.jsp");
 
     }
 

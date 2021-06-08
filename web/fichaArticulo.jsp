@@ -15,6 +15,7 @@
   </head>
 
   <body>
+      <%@include file="cabecera.html" %>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script>
           window.addEventListener("load",p9_ej1);
@@ -53,18 +54,7 @@
       
       
       
-    <c:if test="${rolCliente==true}">
-             <%@include file="clientes/cabeceraCliente.html" %>    
-    </c:if>
-    <c:if test="${roladmin==true}">
-         <%@include file="admin/cabeceraAdmin.html" %>     
-    </c:if>    
-     
-    <c:if test="${rolCliente==false}">
-        <c:if test="${roladmin==false}">
-            <%@include file="cabecera.html" %> 
-        </c:if>
-    </c:if>
+   
     <div class="sombra">
       <div class="nucleo">
         <div id="migas">

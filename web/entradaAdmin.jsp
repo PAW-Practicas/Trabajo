@@ -22,7 +22,7 @@
   </head>
 
   <body >
-    <div class="logo"><a href="${ctx}/index.html"><img src="${ctx}/img/LogoElectrosa200.png" border="0"></a></div>
+      <div class="logo"><a href="${ctx}/index.jsp"><img src="${ctx}/img/LogoElectrosa200.png" ></a></div>
 
     <div class="sombra">
       <div class="nucleo">
