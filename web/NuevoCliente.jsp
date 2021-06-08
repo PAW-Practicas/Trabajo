@@ -264,13 +264,13 @@
                             </div>
                         </fieldset>
 
-<!--                    <fieldset>
+                    <fieldset>
                                         
                         
                     <legend> Captcha </legend>
                    <div class="g-recaptcha" data-sitekey="6LevlBcbAAAAAOiERcYFRxMO-kwOFqY6lBC0sJi0"></div>
                    <script src='https://www.google.com/recaptcha/api.js'></script>                
-                          </fieldset>              -->
+                   </fieldset>              
                                         
                         <fieldset class="submit"> 
                             <div class="left">
