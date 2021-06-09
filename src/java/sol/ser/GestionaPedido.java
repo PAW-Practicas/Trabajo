@@ -19,7 +19,6 @@ import paw.model.LineaEnRealizacion;
 import paw.model.PedidoEnRealizacion;
 import paw.util.servlet.ParameterParser;
 
-
 public class GestionaPedido extends HttpServlet {
 
     private static GestorBDPedidos gbp = new GestorBDPedidos();
@@ -28,105 +27,106 @@ public class GestionaPedido extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            
-//           for (Almacen a : gbd.getAlmacenes()){
-//               a.getCoordX()
-//           }
-            
-            
-            String accion = request.getParameter("accion");
-            String codArt = request.getParameter("codArt");
-            PedidoEnRealizacion carrito = (PedidoEnRealizacion) request.getSession().getAttribute("carrito");
-            Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
-            
-            if(carrito==null)carrito=gbp.getPedidoEnRealizacion(cliente.getCodigo());
-            if(carrito==null)carrito = new PedidoEnRealizacion(cliente);
-            
-            
-            if (codArt != null) {
-                
-                if (accion.equals("comprar")) {
-                    request.setAttribute("accion", "comprar");
-                    request.setAttribute("codArt", codArt);
-                    
-                    RequestDispatcher rd = request.getRequestDispatcher("Carrito");
-                    rd.forward(request, response);
-                    
-                    return;
-                }
-                
-                if (accion.equals("quitar")) {
-//                    request.setAttribute("accion", "quitar");
-//                    request.setAttribute("codArt", codArt);
-                    
-                   boolean b=carrito.removeLinea(codArt);
-                    request.getSession().setAttribute("carrito",carrito);
-                    response.sendRedirect("carrito.jsp");
-                    return;
-                }
-                
-                if (accion.equals("cancelar")) {
-                    request.setAttribute("msg", "¿Desea cancelar el pedido:" + carrito.getCodigo());
-                    request.setAttribute("accion", "cancelar");
-                    request.setAttribute("codArt", codArt);
-                    RequestDispatcher rd = request.getRequestDispatcher("confirmacion.jsp");
-                    rd.forward(request, response);
-                    return;
-                }
-                
-            }
-        } catch (ExcepcionDeAplicacion ex) {
-            Logger.getLogger(GestionaPedido.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        doPost(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        PedidoEnRealizacion carrito = (PedidoEnRealizacion) request.getSession().getAttribute("carrito");
-
-        procesaParams(carrito, request);
         String accion = request.getParameter("accion");
         String codArt = request.getParameter("codArt");
+        Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
 
-        if (accion.equals("Seguir comprando")) {
+        try {
 
-            response.sendRedirect("../catalogo.jsp");
+            PedidoEnRealizacion carrito = (PedidoEnRealizacion) request.getSession().getAttribute("carrito");
+            if (carrito == null) {
 
-        }
-        if (accion.equals("Cerrar pedido")) {
+                carrito = gbp.getPedidoEnRealizacion(cliente.getCodigo());
 
-            request.getSession().setAttribute("pedidoACerrar", carrito);
-            request.setAttribute("siLink", "CierraPedido?accion=cerrar");
-            request.setAttribute("noLink", "CierraPedido?accion=cancelar");
-            request.setAttribute("msg", "¿Desea cerrar el pedido:" + carrito.getCodigo() + "?");
-            RequestDispatcher rd = request.getRequestDispatcher("confirmacion.jsp");
-            rd.forward(request, response);
-        }
+            }
+            if (carrito == null) {
+                carrito = new PedidoEnRealizacion(cliente);
+            }
+            procesaParams(carrito, request);
 
-        if (accion.equals("Guardar pedido")) {
-            try {
-//                GestorBDPedidos.getPedidoEnRealizacion
-                
+            if (accion.equals("Seguir comprando")) {
+
+                response.sendRedirect("../BuscarArticulos");
+
+            }
+            if (accion.equals("Cerrar pedido")) {
+
+                request.getSession().setAttribute("pedidoACerrar", carrito);
+                request.setAttribute("siLink", "CierraPedido?accion=cerrar");
+                request.setAttribute("noLink", "CierraPedido?accion=cancelar");
+                request.setAttribute("msg", "¿Desea cerrar el pedido:" + carrito.getCodigo() + "?");
+                RequestDispatcher rd = request.getRequestDispatcher("confirmacion.jsp");
+                rd.forward(request, response);
+            }
+
+            if (accion.equals("Guardar pedido")) {
+
                 gbp.grabaPedidoEnRealizacion(carrito);
-            
+
                 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
                 return;
-            } catch (ExcepcionDeAplicacion ex) {
-                Logger.getLogger(GestionaPedido.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-        }
-        
-        if (accion.equals("Cancelar")) {
-            request.getSession().setAttribute("pedidoACancelar", carrito);
-              request.setAttribute("siLink", "AnulaCarrito?accion=anular");
-            request.setAttribute("noLink", "AnulaCarrito?accion=cancelar");
-            request.setAttribute("msg", "Va a proceder a eliminar su pedido en realización .¿Está usted seguro?");
-            RequestDispatcher rd = request.getRequestDispatcher("confirmacion.jsp");
-            rd.forward(request, response);
+
+            if (accion.equals("Cancelar")) {
+                request.getSession().setAttribute("pedidoACancelar", carrito);
+                request.setAttribute("siLink", "AnulaCarrito?accion=anular");
+                request.setAttribute("noLink", "AnulaCarrito?accion=cancelar");
+                request.setAttribute("msg", "Va a proceder a eliminar su pedido en realización .¿Está usted seguro?");
+                RequestDispatcher rd = request.getRequestDispatcher("confirmacion.jsp");
+                rd.forward(request, response);
+            }
+
+            if (accion.equals("comprar")) {
+                request.setAttribute("accion", "comprar");
+                request.setAttribute("codArt", codArt);
+
+                RequestDispatcher rd = request.getRequestDispatcher("Carrito");
+                rd.forward(request, response);
+
+                return;
+            }
+
+            if (accion.equals("quitar")) {
+
+
+//                procesaParams(carrito, request);
+                boolean b = carrito.removeLinea(codArt);
+                gbp.grabaPedidoEnRealizacion(carrito);
+
+//                request.getSession().setAttribute("carrito", carrito);
+                response.sendRedirect("carrito.jsp");
+                return;
+
+            }
+
+            if (accion.equals("cancelar")) {
+                request.setAttribute("msg", "¿Desea cancelar el pedido:" + carrito.getCodigo());
+                request.setAttribute("accion", "cancelar");
+                request.setAttribute("codArt", codArt);
+                RequestDispatcher rd = request.getRequestDispatcher("confirmacion.jsp");
+                rd.forward(request, response);
+                return;
+            }
+
+            if (accion.equals("Eliminar")) {
+
+                request.setAttribute("siLink", "AnularPedido?codPedido=" + codArt);
+                request.setAttribute("noLink", "VerPedido?cp=" + codArt);
+                request.setAttribute("msg", "Va a proceder a eliminar su pedido " + codArt + " .¿Está usted seguro?");
+                RequestDispatcher rd = request.getRequestDispatcher("confirmacion.jsp");
+                rd.forward(request, response);
+
+            }
+        } catch (ExcepcionDeAplicacion ex) {
+            Logger.getLogger(GestionaPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
