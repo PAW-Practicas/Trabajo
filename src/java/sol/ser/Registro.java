@@ -8,8 +8,11 @@ package sol.ser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +25,9 @@ import paw.model.ExcepcionDeAplicacion;
 import paw.util.ReCaptchaException;
 import paw.util.UtilesString;
 import paw.util.Validacion;
+import paw.util.mail.DatosCorreo;
+import paw.util.mail.GestorCorreo;
+import paw.util.mail.conf.ConfiguracionCorreo;
 import paw.util.servlet.UtilesServlet;
 
 /**
@@ -31,7 +37,7 @@ import paw.util.servlet.UtilesServlet;
 public class Registro extends HttpServlet {
 
     private static GestorBD gbd = new GestorBD();
-//public static paw.util.ReCaptchaValidator valCaptcha = new paw.util.ReCaptchaValidator("6LevlBcbAAAAAOiERcYFRxMO-kwOFqY6lBC0sJi0","6LevlBcbAAAAAIdEn7AFRrXO70lgSnwnlPjgmIIU ");
+public static paw.util.ReCaptchaValidator valCaptcha = new paw.util.ReCaptchaValidator("6LevlBcbAAAAAOiERcYFRxMO-kwOFqY6lBC0sJi0","6LevlBcbAAAAAIdEn7AFRrXO70lgSnwnlPjgmIIU");
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,15 +72,39 @@ public class Registro extends HttpServlet {
 
 
             
-//            if(l.isEmpty()&& valCaptcha.verifyResponse(request)  ){
-            if(l.isEmpty()){
+            if(l.isEmpty()&& valCaptcha.verifyResponse(request)  ){
+//            if(l.isEmpty()){
                 Cliente c2=gbd.insertaCliente(c, pwd, rpwd);
                 request.getSession().setAttribute("cliente", c2);
                 
-                String email= request.getParameter("email");
+                String emailUsser= request.getParameter("email");
                 
-                request.setAttribute("email",email);
-                response.sendRedirect("Mail");
+                Properties props = new Properties();
+	    props.load(getClass().getClassLoader().getResourceAsStream("mail.properties"));          
+            String hola=request.getParameter("email");
+            
+            
+            String emailElectrosa= props.getProperty("mail.smtp.user");
+            
+            
+            DatosCorreo mail = new DatosCorreo(emailElectrosa
+                    , emailUsser
+                    , "Bienvenido a electrosa.com"
+                    ,"Es un placer para nosotros tenerle como cliente. Visite nuestra web en la dirección:\n" );
+            mail.setMimeType("text/plain;charset=UTF-8");
+            mail.setCharset("utf-8");
+            
+            
+            request.getSession().setAttribute("cliente", c);
+            
+
+            
+//            String email= request.getParameter("email");
+            
+            
+            GestorCorreo.envia(mail, ConfiguracionCorreo.getDefault());
+            response.sendRedirect("clientes/AreaCliente");
+            return;
             }
             else{
                 
@@ -100,8 +130,6 @@ public class Registro extends HttpServlet {
                  
                  
                  request.setAttribute("provincia",request.getParameter("provincia"));
-                 
-               
                 request.setAttribute("gbd", gbd);
                 request.setAttribute("Error", l);
             RequestDispatcher rd = request.getRequestDispatcher("NuevoCliente.jsp");
@@ -110,14 +138,18 @@ public class Registro extends HttpServlet {
 
         } catch (ExcepcionDeAplicacion ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AddressException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         } 
-//        catch (ReCaptchaException ex) {
-//            
-//             RequestDispatcher rd = request.getRequestDispatcher("NuevoCliente.jsp");
-//            rd.forward(request, response);
-//            
-//            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        catch (ReCaptchaException ex) {
+            
+             RequestDispatcher rd = request.getRequestDispatcher("NuevoCliente.jsp");
+            rd.forward(request, response);
+            
+            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

@@ -121,7 +121,8 @@
                             </script>
                             <label for="tipo"><fmt:message key="catalogo.fltr.tipo"/> </label>
                             <select name="tipo" id="tipo">
-                                <option value="-1">- Cualquiera -</option>
+                                <c:if test="${!empty tipo}"> <option value="${tipo}">${tipo}</option> </c:if>
+                                <option value="">- Cualquiera -</option>
                                 <option value="Aspirador">Aspiradores</option>
                                 <option value="Campana">Campanas</option>
                                 <option value="Cocina">Cocinas</option>
@@ -135,7 +136,8 @@
 
                             <label for="fabricante"><fmt:message key="catalogo.fltr.fab"/> </label>
                             <select name="fabricante" id="fabricante">
-                                <option value="-1">- Cualquiera -</option>
+                                <c:if test="${!empty fabricante}"> <option value="${fabricante}">${fabricante}</option> </c:if>
+                                <option value="">- Cualquiera -</option>
                                 <option value="Edesa">Edesa</option>
                                 <option value="Fagor">Fagor</option>
                                 <option value="Miele">Miele</option>

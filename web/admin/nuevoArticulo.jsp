@@ -34,35 +34,7 @@
       </div>
     </div>  
 
-    <div class="barra_menus">
-      <div class="pestanias">
-        <div class="grupoPestanias">
-          <div class="pestaniaNoSel"><a href="../index.html">Para usuarios</a></div>
-          <div class="pestaniaSel">Intranet</div>
-        </div>
-      </div>
-
-      <div id="cssmenu">
-        <ul>
-          <li class='has-sub'><a href="index.html">Art&iacute;culos</a>
-            <ul>
-              <li><a href="listadoArticulos.jsp">Listar</a></li>
-              <li><a href="NuevoArticulo">A&ntilde;adir</a> </li>
-              <li><a href="HazEstadistica">Estadísticas</a> </li>
-            </ul>
-          </li>
-          <li class='has-sub'><a href="index.html">Clientes</a>	
-            <ul>
-              <li><a href="index.html">Listar</a> </li>
-              <li><a href="index.html">A&ntilde;adir</a> </li>
-            </ul>    
-          </li>
-          <li><a href="index.html">Pedidos</a></li>
-          <li class='last'><a href="index.html">Stocks</a></li>
-        </ul>
-        <div style="clear: left;"></div>
-      </div>
-    </div> 
+    <%@include file="cabeceraAdmin.html" %>
 
     <div class="sombra">
       <div class="nucleo">

@@ -212,7 +212,7 @@
 
                                     <td style="text-align: center"><img src="../img/pdf.gif" title="Descargar en PDF"/></td>
 
-                                    <td style="text-align: center"><a href="AnularPedido?codPedido=${pendiente.getCodigo()}"><img src="../img/cancel.png" title="Cancelar el pedido"/></td>
+                                    <td style="text-align: center"><a href="VerPedido?cp=${pendiente.getCodigo()}"><img src="../img/cancel.png" title="Cancelar el pedido"/></td>
 
 
 
@@ -305,9 +305,9 @@
                                     </c:if>     
 
 
-
                                     <td style="text-align: center"><img src="../img/pdf.gif" title="Descargar en PDF"/></td>
-                                    <td>${anulado.getCodigo()}</td>
+                                    <td><a href="VerPedido?cp=${anulado.getCodigo()}">${anulado.getCodigo()} </a> </td>
+                                    
                                     <td><fmt:formatDate value="${anulado.getFechaCierre().time}"/></td>
                                     <td><fmt:formatDate value="${anulado.getFechaAnulacion().time}"/></td>  
                                 </tr>

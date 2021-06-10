@@ -78,7 +78,10 @@
             <div class="clear"></div>
           </div>
           <div class="cabIdCliente">Identificación del cliente</div>
-          <div class="detIdCliente">
+         
+  <c:if test="${empty anulado}"> 
+      
+           <div class="detIdCliente">
             <div class="izda">Cliente: ${cliente.getCodigo()} </div>
             <br>
             <div class="izda">${cliente.getNombre()}</div>
@@ -87,7 +90,6 @@
             <div class="dcha"> CIF: ${  cliente.getCif()},</div>
             <div class="clear"></div>
           </div>
-
           <div class="izda direccionEntregaPedLabel">A entregar en:</div>
           <div class="izda direccionEntregaPed">${pedido.getDirEntrega().getCalle()}<br>${pedido.getDirEntrega().getCiudad()}
           <br>${pedido.getDirEntrega().getCp()} - ${pedido.getDirEntrega().getProvincia()}</div>
@@ -107,7 +109,7 @@
             </tr>
             
          
-            
+          
             <tr>
               <td>Cantidad</td>
               <td>Art&iacute;culo</td>
@@ -136,27 +138,88 @@
                </tr>  
                
             </c:forEach>
-                
-            
-               
-
-          </table>
+             </table>
                <div class="resPedido">
             <span>TOTAL: ${precioTotal} &euro;</span>
             <div class="clear"></div>
-          </div>  
-           
-          
-       
-          <div>
+          </div>     
+               <div>
             * S.D.: sin disponibilidad. Recibirá una notificación de entrega en el momento en que podamos atender su petición.
           </div>   
         </div>
+           
+            </c:if>    
+        <c:if test="${not empty anulado}">    
+                <div class="detIdCliente">
+            <div class="izda">Cliente: ${cliente.getCodigo()} </div>
+            <br>
+            <div class="izda">${cliente.getNombre()}</div>
+            
+            <div class="dcha"> CIF: ${  cliente.getCif()}</div>
+            <br>
+            <div class="izda">Fecha Anulacion:<fmt:formatDate value="${pedido.getFechaAnulacion().time}"/></div>
+            <br>
+            <div class="izda">Fecha Cierre:<fmt:formatDate value="${pedido.getFechaCierre().time}"/></div>
+          
+            
+            <div class="clear"></div>
+            
+            <table width="95%">
+            <colgroup>
+              <col width="9%">
+              <col width="49%">
+              <col width="11%">
+              
+              
+            </colgroup>
+            <tr>
+              <td colspan="6">Detalle del pedido</td>
+            </tr>
+            
+         
+          
+            <tr>
+              <td>Cantidad</td>
+              <td>Art&iacute;culo</td>
+              <td>Codigo</td>
+        
+            </tr>
+               <c:forEach var="linea" items="${pedido.getLineas()}" varStatus="i">   
+                   
+                    
+              
+                    <c:if test="${i.index%2==0 }"><tr class="par" }> </c:if>    
+                    <c:if test="${i.index%2!=0 }"><tr></c:if>
+                    
+                     
+               
+                 <td style="text-align:center">${linea.getCantidad()}</td>
+                 <td>${linea.getArticulo().getNombre()}</td>
+                 <td style="text-align: right">${linea.codigo} </td>
+                 
+           
+               </tr>   
+               
+            </c:forEach>
+             </table>
+            
+          </div>
+
+          <div class="clear"></div>
+             
+        </c:if>
+               
+
+          
+           
+          
+       
+       
             
           <c:if test="${! empty opcion }">   
 
           <div  class="anulab">
-            <a href="AnularPedido?codPedido=${pedido.getCodigo()}">ANULAR PEDIDO</a>
+            <a href="GestionaPedido?accion=Eliminar&codArt=${pedido.getCodigo()}">ANULAR PEDIDO</a>
           </div> 
         </c:if> 
           <div  class="NOanulab">

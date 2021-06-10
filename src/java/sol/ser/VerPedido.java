@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import paw.bd.GestorBDPedidos;
-import paw.model.Articulo;
 import paw.model.Cliente;
 import paw.model.ExcepcionDeAplicacion;
 import paw.model.Linea;
 import paw.model.Pedido;
+import paw.model.PedidoAnulado;
 import paw.util.UtilesString;
 
 /**
@@ -43,9 +43,12 @@ public class VerPedido extends HttpServlet {
             
             
             Pedido p=gbp.getPedido(codPedido);
-            if(p==null){
+             PedidoAnulado x=gbp.getPedidoAnulado(codPedido);
+            if(p==null&&x==null){
+            
                 response.sendError(404,"Código de pedido no válido("+codPedido+")");
                 return;
+                
             }
             
             
@@ -54,8 +57,8 @@ public class VerPedido extends HttpServlet {
           
             List<Pedido> pedPendientes = gbp.getPedidosPendientes(c.getCodigo());
             List<Pedido> pedCompletados = gbp.getPedidosCompletados(c.getCodigo());
-            p.getLineas();
-
+            List<PedidoAnulado> pedAnulados= gbp.getPedidosAnulados(c.getCodigo());
+           
             
             if(request.getHeader("X-Requested-With")!=null){
                 response.setContentType("application/json; charset=UTF-8");
@@ -64,15 +67,44 @@ public class VerPedido extends HttpServlet {
                 response.getWriter().print(json);
                 return;
             }
-            
-            
+            double PrecioPedido=0;
+          
+           if(x!=null){
+            if(pedAnulados.contains(x)){
+//                 x.getLineas().get(1).
+//                for(LineaAnulada la : x.getLineas()){
+//                    PrecioPedido+=l();
+//                }
+//                  String opcionPedido;  
+//                opcionPedido= pedPendientes.contains(p)? "pendiente" : "";
+//                  x.getLineas()
+//                LineaAnulada la;
+////                la.getCantidad()
+////                la.getArticulo()
+////                la.getCodigo
+//                  x.getFechaAnulacion()
+//                  x.getFechaAnulacion()()
+                
+                request.setAttribute("opcion", "");
+                request.setAttribute("anulado", "anulado");
+                request.setAttribute("pedido", x);
+
+                
+                request.setAttribute("precioTotal","Cancelado");
+                request.setAttribute("cliente",c);
+                request.setAttribute("x", p);
+                RequestDispatcher rd = request.getRequestDispatcher("pedido.jsp");
+                rd.forward(request, response);
+                return ;
+            }
+           } 
             
             if(pedPendientes.contains(p)||pedCompletados.contains(p)){
-                 double PrecioPedido=0;
+                 
                  
                //funcional PrecioPedido = p.getLineas().stream().map(x -> x.getPrecioReal()).reduce(PrecioPedido, (accumulator, _item) -> accumulator + _item);
-                for(Linea x : p.getLineas()){
-                    PrecioPedido+=x.getPrecioReal();
+                for(Linea f : p.getLineas()){
+                    PrecioPedido+=f.getPrecioReal();
                 }
                   String opcionPedido;  
                 opcionPedido= pedPendientes.contains(p)? "pendiente" : "";

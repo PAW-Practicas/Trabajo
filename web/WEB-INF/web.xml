@@ -33,10 +33,6 @@
         <servlet-class>sol.ser.Registro</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Mail</servlet-name>
-        <servlet-class>sol.ser.Mail</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PedidosCliente</servlet-name>
         <servlet-class>sol.ser.PedidosCliente</servlet-class>
     </servlet>
@@ -91,10 +87,6 @@
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/NuevoCliente</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Mail</servlet-name>
-        <url-pattern>/Mail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PedidosCliente</servlet-name>

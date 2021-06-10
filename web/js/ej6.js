@@ -5,6 +5,9 @@ function ej6(){
             for (let x of selects) {
                 x.addEventListener("change",function(e){
                     var form = document.getElementById("filtroCatalogo");
+                    e.target
+                    e.target.value
+                    
                     form.submit();
                     e.preventDefault();
                 });

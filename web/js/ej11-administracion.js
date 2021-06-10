@@ -12,7 +12,7 @@ function ej11() {
         y.addEventListener("dblclick", function (e) {
            var hijos=y.getElementsByTagName("a");
            var enlace=hijos.item(1).innerText;
-           window.open("http://localhost:8080/PAW-pr8/FichaArticulo?codArt="+enlace,enlace,"width=800,height=500");
+           window.open("http://localhost:8080/PAW-pr9/FichaArticulo?codArt="+enlace,enlace,"width=800,height=500");
         });
 
     }

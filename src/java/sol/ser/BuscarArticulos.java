@@ -110,6 +110,7 @@ public class BuscarArticulos extends HttpServlet {
             if (listado.size() == 1) {
                 RequestDispatcher rd = request.getRequestDispatcher("/FichaArticulo");
                 rd.forward(request, response);
+                return;
             }
 
             RequestDispatcher rd = request.getRequestDispatcher("/catalogo.jsp");

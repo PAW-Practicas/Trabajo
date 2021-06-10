@@ -73,6 +73,7 @@ public class NuevoArticulo extends HttpServlet {
             gbd.insertaArticulo(articulo);
             RequestDispatcher rd = request.getRequestDispatcher("listadoArticulos.jsp");
             rd.forward(request, response);
+            return;
             }
             request.setAttribute("tipos", gbd.getTiposArticulos());
             request.setAttribute("fabricantes", gbd.getFabricantes());

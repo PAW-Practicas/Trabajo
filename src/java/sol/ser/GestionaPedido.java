@@ -94,11 +94,10 @@ public class GestionaPedido extends HttpServlet {
                 return;
             }
 
-            if (accion.equals("quitar")) {
+            if (accion.startsWith("quitar")) {
 
-
-//                procesaParams(carrito, request);
-                boolean b = carrito.removeLinea(codArt);
+                String cod = accion.split("_")[1];
+                boolean b = carrito.removeLinea(cod);
                 gbp.grabaPedidoEnRealizacion(carrito);
 
 //                request.getSession().setAttribute("carrito", carrito);
